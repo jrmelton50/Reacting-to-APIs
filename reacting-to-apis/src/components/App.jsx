@@ -8,7 +8,7 @@ export default class App extends Component {
         super(props);
         this.state = {
             movies: [],
-            // moviesHaveBeenLoaded: false
+            moviesHaveBeenLoaded: false
         }
     }
 
@@ -19,8 +19,8 @@ export default class App extends Component {
         })
         .then( (object) => {
             this.setState({
-                movies: object 
-                // moviesHaveBeenLoaded: this.state.moviesHaveBeenLoaded
+                movies: object,
+                moviesHaveBeenLoaded: this.state.moviesHaveBeenLoaded
             });
 
             // HOW TO CHECK DATA THAT WAS JUST UPDATED 
@@ -35,27 +35,32 @@ export default class App extends Component {
         });
     }
 
-    // handleLoadingMovies() {
-    //     this.setState({
-    //         moviesHaveBeenLoaded: true
-    //     });
-    // }
+    handleLoadingMovies() {
+        this.setState({
+            movies: this.state.movies,
+            moviesHaveBeenLoaded: true
+        });
+    }
 
     render() {
-        // if (!moviesHaveBeenLoaded) {
-        //     return (
-        //         <React.Fragment>
-        //             <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/ca/Studio_Ghibli_logo.svg/1200px-Studio_Ghibli_logo.svg.png" alt="Studio Ghibli logo"/>
-        //             <button onClick= { (event) => this.handleLoadingMovies()}> Load Movies </button>
-        //         </React.Fragment>
-        //     );
-        // }
-        // else {
+        if (!this.state.moviesHaveBeenLoaded) {
             return (
                 <React.Fragment>
+                    <img className="row" src="https://upload.wikimedia.org/wikipedia/en/thumb/c/ca/Studio_Ghibli_logo.svg/1200px-Studio_Ghibli_logo.svg.png" alt="Studio Ghibli logo"/>
+                    <div className="row">
+                        <div className="col-md-5"></div>
+                        <button className="btn btn-primary col-md-1" onClick= { (event) => this.handleLoadingMovies() }> Load Movies </button>
+                    </div>
+                </React.Fragment>
+            );
+        }
+        else {
+            return (
+                <React.Fragment>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/ca/Studio_Ghibli_logo.svg/1200px-Studio_Ghibli_logo.svg.png" alt="Studio Ghibli logo"/>
                     <List movies={this.state.movies}/>
                 </React.Fragment>
             );
-        // }
+        }
     }
 }
