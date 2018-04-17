@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-export default class List extends Component {
+export default class MovieList extends Component {
     render() {
         let movies = this.props.movies.map( (movie) => {
             return (
